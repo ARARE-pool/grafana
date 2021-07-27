@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 4,
-  "iteration": 1624517712964,
+  "iteration": 1627334828170,
   "links": [],
   "panels": [
     {
@@ -325,7 +325,7 @@
             {
               "from": "0",
               "id": 0,
-              "text": "Leaderlog",
+              "text": "Yes",
               "to": "129600",
               "type": 2,
               "value": "129600"
@@ -333,7 +333,7 @@
             {
               "from": "129600",
               "id": 1,
-              "text": "No Leaderlog",
+              "text": "No",
               "to": "432000",
               "type": 2
             }
@@ -388,7 +388,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Time to next Epoch",
+      "title": "Time to Leaderlog",
       "type": "stat"
     },
     {
@@ -912,7 +912,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Deligators",
+      "title": "Delegators",
       "type": "stat"
     },
     {
@@ -1670,7 +1670,7 @@
         "x": 0,
         "y": 29
       },
-      "id": 85,
+      "id": 89,
       "options": {
         "colorMode": "background",
         "graphMode": "none",
@@ -1686,7 +1686,6 @@
         "textMode": "value"
       },
       "pluginVersion": "7.1.2",
-      "repeat": null,
       "targets": [
         {
           "expr": "((cardano_node_metrics_remainingKESPeriods_int * 86400) * 1000) + (1621629668 * 1000)",
@@ -1698,10 +1697,26 @@
         },
         {
           "expr": "((time()) - (rate(cardano_node_metrics_slotInEpoch_int{job=\"producer-ada-1_cardano_node\"}[10m])) + (((cardano_node_metrics_remainingKESPeriods_int-1) * 86400) * 1.5) + 119062) * 1000",
+          "hide": true,
           "instant": false,
           "interval": "",
           "legendFormat": "",
           "refId": "C"
+        },
+        {
+          "expr": "(time()*1000 ) - (cardano_node_metrics_slotInEpoch_int{job=\"producer-ada-1_cardano_node\"} * 1000) +(3 * 86400 * 10000)",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "B"
+        },
+        {
+          "expr": "time()*1000 + cardano_node_metrics_remainingKESPeriods_int*86400",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "D"
         }
       ],
       "timeFrom": null,
@@ -3784,7 +3799,7 @@
     ]
   },
   "time": {
-    "from": "now-12h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {
@@ -3815,5 +3830,5 @@
   "timezone": "",
   "title": "ARARE Dashboard",
   "uid": "oVdinzz7z",
-  "version": 1
+  "version": 6
 }
